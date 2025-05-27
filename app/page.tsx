@@ -1,16 +1,19 @@
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { ArrowRight, Zap, Moon, Users, Leaf, Wifi, Shield, Sparkles } from "lucide-react"
+import { Zap, Moon, Users, Leaf, Wifi, Shield, Sparkles, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { ThemeToggle } from "@/components/theme-toggle"
-import { CarbonCalculator } from "@/components/carbon-calculator"
-import { useState } from "react"
+import { FeatureTags } from "@/components/feature-tags"
+import { MobileMenu } from "@/components/mobile-menu"
+import { AnimatedSection } from "@/components/animated-section"
+import { AnimatedCard } from "@/components/animated-card"
+import { ParallaxBackground } from "@/components/parallax-background"
+import { StatCounter } from "@/components/stat-counter"
 
 export default function LandingPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#0d1b0d] text-white">
-      {/* Grid background pattern */}
-      <div className="fixed inset-0 bg-[linear-gradient(to_right,#1a2f1a_1px,transparent_1px),linear-gradient(to_bottom,#1a2f1a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_60%,transparent_100%)]" />
+    <div className="flex flex-col min-h-screen bg-[#0d1b0d] text-white overflow-x-hidden">
+      {/* Parallax Background */}
+      <ParallaxBackground />
 
       {/* Navigation */}
       <header className="fixed top-0 w-full bg-black/80 backdrop-blur px-6 py-4 flex z-50">
@@ -42,12 +45,15 @@ export default function LandingPage() {
           </div>
           <div className="ml-auto flex items-center space-x-4">
             <ThemeToggle />
-            <button className="px-6 py-2 text-white border border-white rounded-full hover:bg-white/10 transition-colors">
-              Log in
-            </button>
-            <button className="px-6 py-2 bg-white text-black rounded-full hover:bg-white/90 transition-colors">
-              Book a demo
-            </button>
+            <div className="hidden md:flex items-center space-x-4">
+              <button className="px-6 py-2 text-white border border-white rounded-full hover:bg-white/10 transition-colors">
+                Log in
+              </button>
+              <button className="px-6 py-2 bg-white text-black rounded-full hover:bg-white/90 transition-colors">
+                Book a demo
+              </button>
+            </div>
+            <MobileMenu />
           </div>
         </div>
       </header>
@@ -57,29 +63,43 @@ export default function LandingPage() {
         <section className="min-h-screen flex flex-col items-center justify-center pt-32 px-4">
           <div className="container relative z-10">
             <div className="mx-auto max-w-[64rem] text-center">
-              <div className="mb-6 flex flex-wrap gap-2 justify-center">
-                <span className="bg-black/40 border border-gray-700 rounded-full px-3 py-1 text-sm">
-                  <Sparkles className="inline-block mr-1 h-3 w-3" />
-                  AI Sustainable Ecosystem
-                </span>
-              </div>
-              <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl text-white">
-                Environmental assets based <span className="block">on real-world data</span>
-              </h1>
-              <p className="mb-8 text-lg text-white/70 sm:text-xl max-w-3xl mx-auto">
-                GreenOrb offers real-time carbon transparency, automated offset management, and token-backed credibility
-                all in one place.
-              </p>
-              <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-                <button className="px-6 py-3 bg-white text-black rounded-full font-medium hover:bg-white/90 transition-colors group">
-                  Start Free Beta
-                  <ArrowRight className="inline-block ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </button>
-                <button className="px-6 py-3 text-white border border-white rounded-full font-medium hover:bg-white/10 transition-colors">
-                  Watch demo
-                </button>
-              </div>
-              <FeatureTags />
+              <AnimatedSection delay={0.1}>
+                <div className="mb-6 flex flex-wrap gap-2 justify-center">
+                  <span className="bg-black/40 border border-gray-700 rounded-full px-3 py-1 text-sm">
+                    <Sparkles className="inline-block mr-1 h-3 w-3" />
+                    AI Sustainable Ecosystem
+                  </span>
+                </div>
+              </AnimatedSection>
+
+              <AnimatedSection delay={0.3}>
+                <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl text-white">
+                  Environmental assets based <span className="block">on real-world data</span>
+                </h1>
+              </AnimatedSection>
+
+              <AnimatedSection delay={0.5}>
+                <p className="mb-8 text-lg text-white/70 sm:text-xl max-w-3xl mx-auto">
+                  GreenOrb offers real-time carbon transparency, automated offset management, and token-backed
+                  credibility all in one place.
+                </p>
+              </AnimatedSection>
+
+              <AnimatedSection delay={0.7}>
+                <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
+                  <button className="px-6 py-3 bg-white text-black rounded-full font-medium hover:bg-white/90 transition-colors group">
+                    Start Free Beta
+                    <ArrowRight className="inline-block ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </button>
+                  <button className="px-6 py-3 text-white border border-white rounded-full font-medium hover:bg-white/10 transition-colors">
+                    Watch demo
+                  </button>
+                </div>
+              </AnimatedSection>
+
+              <AnimatedSection delay={0.9}>
+                <FeatureTags />
+              </AnimatedSection>
             </div>
           </div>
         </section>
@@ -87,86 +107,57 @@ export default function LandingPage() {
         {/* Features Grid */}
         <section id="features" className="py-24 lg:py-32">
           <div className="container">
-            <div className="mx-auto max-w-[58rem] text-center mb-12">
+            <AnimatedSection className="mx-auto max-w-[58rem] text-center mb-12">
               <h2 className="text-3xl font-bold leading-tight tracking-tighter md:text-4xl lg:leading-[1.1] text-white">
                 Engineered for planet-scale performance
               </h2>
               <p className="mt-4 text-lg text-white/70">
                 Scientists using build with the same tools as financial-grade leaders, only greener.
               </p>
-            </div>
+            </AnimatedSection>
+
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              <Card className="bg-black/40 border-gray-800 text-white">
-                <CardHeader>
-                  <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-lg bg-green-600/20">
-                    <Zap className="h-6 w-6 text-green-400" />
-                  </div>
-                  <CardTitle className="text-white">Lightning-fast ledger</CardTitle>
-                  <CardDescription className="text-white/70">
-                    5.5x faster for every ORM transaction—so audits never bottleneck performance
-                  </CardDescription>
-                </CardHeader>
-              </Card>
+              <AnimatedCard
+                icon={<Zap className="h-6 w-6 text-green-400" />}
+                title="Lightning-fast ledger"
+                description="5.5x faster for every ORM transaction—so audits never bottleneck performance"
+                delay={0.1}
+              />
 
-              <Card className="bg-black/40 border-gray-800 text-white">
-                <CardHeader>
-                  <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-lg bg-green-600/20">
-                    <Moon className="h-6 w-6 text-green-400" />
-                  </div>
-                  <CardTitle className="text-white">Dark & light modes</CardTitle>
-                  <CardDescription className="text-white/70">
-                    Low-glare night mode and high-contrast day mode, both energy-efficient
-                  </CardDescription>
-                </CardHeader>
-              </Card>
+              <AnimatedCard
+                icon={<Moon className="h-6 w-6 text-green-400" />}
+                title="Dark & light modes"
+                description="Low-glare night mode and high-contrast day mode, both energy-efficient"
+                delay={0.2}
+              />
 
-              <Card className="bg-black/40 border-gray-800 text-white">
-                <CardHeader>
-                  <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-lg bg-green-600/20">
-                    <Users className="h-6 w-6 text-green-400" />
-                  </div>
-                  <CardTitle className="text-white">Unlimited seats</CardTitle>
-                  <CardDescription className="text-white/70">
-                    Flat pricing, invite Finance, Ops, and suppliers at no extra cost
-                  </CardDescription>
-                </CardHeader>
-              </Card>
+              <AnimatedCard
+                icon={<Users className="h-6 w-6 text-green-400" />}
+                title="Unlimited seats"
+                description="Flat pricing, invite Finance, Ops, and suppliers at no extra cost"
+                delay={0.3}
+              />
 
-              <Card className="bg-black/40 border-gray-800 text-white">
-                <CardHeader>
-                  <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-lg bg-green-600/20">
-                    <Leaf className="h-6 w-6 text-green-400" />
-                  </div>
-                  <CardTitle className="text-white">Ultra-low energy</CardTitle>
-                  <CardDescription className="text-white/70">
-                    {"< 0.001 kWh per on-chain write (Hedera Hashgraph backbone)"}
-                  </CardDescription>
-                </CardHeader>
-              </Card>
+              <AnimatedCard
+                icon={<Leaf className="h-6 w-6 text-green-400" />}
+                title="Ultra-low energy"
+                description="< 0.001 kWh per on-chain write (Hedera Hashgraph backbone)"
+                delay={0.4}
+              />
 
-              <Card className="bg-black/40 border-gray-800 text-white">
-                <CardHeader>
-                  <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-lg bg-green-600/20">
-                    <Wifi className="h-6 w-6 text-green-400" />
-                  </div>
-                  <CardTitle className="text-white">Offline audit pack</CardTitle>
-                  <CardDescription className="text-white/70">
-                    One-click ZIP of all signed data for regulators, no internet required
-                  </CardDescription>
-                </CardHeader>
-              </Card>
+              <AnimatedCard
+                icon={<Wifi className="h-6 w-6 text-green-400" />}
+                title="Offline audit pack"
+                description="One-click ZIP of all signed data for regulators, no internet required"
+                delay={0.5}
+              />
 
-              <Card className="bg-black/40 border-gray-800 text-white">
-                <CardHeader>
-                  <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-lg bg-green-600/20">
-                    <Shield className="h-6 w-6 text-green-400" />
-                  </div>
-                  <CardTitle className="text-white">Enterprise Security</CardTitle>
-                  <CardDescription className="text-white/70">
-                    SOC 2 Type II certified with end-to-end encryption and compliance tools
-                  </CardDescription>
-                </CardHeader>
-              </Card>
+              <AnimatedCard
+                icon={<Shield className="h-6 w-6 text-green-400" />}
+                title="Enterprise Security"
+                description="SOC 2 Type II certified with end-to-end encryption and compliance tools"
+                delay={0.6}
+              />
             </div>
           </div>
         </section>
@@ -174,28 +165,17 @@ export default function LandingPage() {
         {/* Stats Section */}
         <section className="border-y border-gray-800 bg-black/40 py-24 lg:py-32">
           <div className="container">
-            <div className="mx-auto max-w-[58rem] text-center mb-12">
+            <AnimatedSection className="mx-auto max-w-[58rem] text-center mb-12">
               <h2 className="text-3xl font-bold leading-tight tracking-tighter md:text-4xl lg:leading-[1.1] text-white">
                 Responsible Impact Makers
               </h2>
-            </div>
+            </AnimatedSection>
+
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-              <div className="text-center">
-                <div className="text-4xl font-bold tracking-tight sm:text-5xl text-white">99%</div>
-                <div className="mt-2 text-sm text-white/70">Uptime SLA</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold tracking-tight sm:text-5xl text-white">45ms</div>
-                <div className="mt-2 text-sm text-white/70">Average response time</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold tracking-tight sm:text-5xl text-white">12M+</div>
-                <div className="mt-2 text-sm text-white/70">Carbon credits issued</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold tracking-tight sm:text-5xl text-white">2030</div>
-                <div className="mt-2 text-sm text-white/70">Net-zero commitment</div>
-              </div>
+              <StatCounter end={99} suffix="%" title="Uptime SLA" delay={0.1} />
+              <StatCounter end={45} suffix="ms" title="Average response time" delay={0.2} />
+              <StatCounter end={12} suffix="M+" title="Carbon credits issued" delay={0.3} />
+              <StatCounter end={2030} title="Net-zero commitment" delay={0.4} />
             </div>
           </div>
         </section>
@@ -203,7 +183,7 @@ export default function LandingPage() {
         {/* CTA Section */}
         <section className="py-24 lg:py-32">
           <div className="container">
-            <div className="mx-auto max-w-[58rem] text-center">
+            <AnimatedSection className="mx-auto max-w-[58rem] text-center">
               <h2 className="text-3xl font-bold leading-tight tracking-tighter md:text-4xl lg:leading-[1.1] text-white">
                 Ready to build the future?
               </h2>
@@ -219,7 +199,7 @@ export default function LandingPage() {
                   Schedule Demo
                 </button>
               </div>
-            </div>
+            </AnimatedSection>
           </div>
         </section>
       </main>
@@ -327,38 +307,5 @@ export default function LandingPage() {
         </div>
       </footer>
     </div>
-  )
-}
-// Client component for feature tags with calculator functionality
-;("use client")
-function FeatureTags() {
-  const [calculatorOpen, setCalculatorOpen] = useState(false)
-
-  return (
-    <>
-      <div className="mt-12 flex flex-wrap gap-3 justify-center">
-        <span className="bg-black/40 border border-gray-700 rounded-full px-4 py-2 text-sm flex items-center gap-2">
-          <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-          ESG Reporting
-        </span>
-        <span className="bg-black/40 border border-gray-700 rounded-full px-4 py-2 text-sm flex items-center gap-2">
-          <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-          Offset
-        </span>
-        <button
-          onClick={() => setCalculatorOpen(true)}
-          className="bg-black/40 border border-gray-700 rounded-full px-4 py-2 text-sm flex items-center gap-2 hover:bg-black/60 transition-colors"
-        >
-          <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-          Carbon Calculator
-        </button>
-        <span className="bg-black/40 border border-gray-700 rounded-full px-4 py-2 text-sm flex items-center gap-2">
-          <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-          Live tracking
-        </span>
-      </div>
-
-      <CarbonCalculator open={calculatorOpen} onOpenChange={setCalculatorOpen} />
-    </>
   )
 }
